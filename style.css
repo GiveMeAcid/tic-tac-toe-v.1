@@ -1,0 +1,17 @@
+#zone {
+    width: 105px;
+    border: 1px solid #ff0000;
+    display: inline-block;
+}
+
+#zone div {
+    display: inline-block;
+}
+
+#zone div input {
+    width: 33px;
+    height: 33px;
+    border: 1px solid #000;
+    text-align: center;
+    font-size: 30px;
+}

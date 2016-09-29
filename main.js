@@ -1,27 +1,43 @@
-var load_zone = window.zone;
+var load_zone = window.zone;//getElementById
 var id = "pole";
 var gameLive = true;
+console.log(load_zone);
 
-//создание div-элементов и вложеных в них input-ов
-for (i = 0; i < 3; i++) {
-    for (j = 0; j < 3; j++) {
-        var div = document.createElement('div');
-        div.className = "box";
-        var newInput = document.createElement('input');
-        newInput.type = "text";
-        newInput.id = id + (i + j + i * 2);
-        newInput.onclick = click;
-        div.appendChild(newInput);
-        load_zone.appendChild(div);
+//создание полей
+function createField(index) {
+    console.log(index);
+    fieldSize(index);
+    load_zone.innerHTML = '';
+    for (var i = 0; i < index; i++) {
+        for (var j = 0; j < index; j++) {
+            var div = document.createElement('div');
+            div.className = "box";
+            var newInput = document.createElement('input');
+            newInput.type = "text";
+            newInput.id = id + (i + j + i * 2);
+            newInput.onclick = click;
+            div.appendChild(newInput);
+            load_zone.appendChild(div);
+        }
+    }
+}
+
+function fieldSize(index) {
+    if (index === 3) {
+        load_zone.classList.remove('zone1');
+        load_zone.classList.add('zone');
+    } else {
+        load_zone.classList.remove('zone');
+        load_zone.classList.add('zone1');
     }
 }
 
 //функция нажатия и вызова "Х"
 function click(event) {
     var target_element = document.getElementById(event.target.id);
-    if (target_element.value == '') {
+    if (!target_element.value.length) {
         target_element.value = 'x';
-        endGame();
+        checkVictory();
         if (gameLive) {
             AI();
         }
@@ -43,9 +59,7 @@ function AI() {
     }
 }
 
-
-
-function endGame() {
+function checkVictory() {
     var count = 0;
 
     for (var i = 0; i < 9; i++) {

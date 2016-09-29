@@ -1,12 +1,19 @@
-#zone {
+.zone {
     width: 105px;
     border: 1px solid #ff0000;
     display: inline-block;
-    margin: 100px 50%;
+    margin: 100px 200px;
 }
 
 #zone div {
     display: inline-block;
+}
+
+.zone1 {
+    width: 175px;
+    border: 1px solid #ff0000;
+    display: inline-block;
+    margin: 100px 400px;
 }
 
 #zone div input {

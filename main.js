@@ -1,28 +1,54 @@
-var load_zone = window.zone;//getElementById
+var load_zone = document.getElementById('zone');//getElementById
+var localDocument;
 var id = "pole";
-var gameLive = true;
-console.log(load_zone);
+var gameLive;
+var sizeOfField;
+var doubleSizeOfField;
+var checkingMassive;
+// console.dir(load_zone);
+// console.log(document);   
 
-//создание полей
+function doc() {
+    localDocument = document;
+}
+
+//field creation
 function createField(index) {
     console.log(index);
     fieldSize(index);
-    load_zone.innerHTML = '';
-    for (var i = 0; i < index; i++) {
+    initField();
+    var counter = 0;
+    for (var i = 0; i < sizeOfField; i++) {
         for (var j = 0; j < index; j++) {
             var div = document.createElement('div');
             div.className = "box";
             var newInput = document.createElement('input');
             newInput.type = "text";
-            newInput.id = id + (i + j + i * 2);
+            newInput.readOnly = true;
+            newInput.id = id + (++counter);
             newInput.onclick = click;
             div.appendChild(newInput);
             load_zone.appendChild(div);
         }
     }
+    localDocument = document;
+    console.log(localDocument.getElementById("pole1"));
+    console.log(localDocument);
 }
 
+//reloading function
+function initField() {
+    load_zone.innerHTML = '';
+    var gameLive = true;
+    var checkingMassive = [];
+
+}
+
+//dynamic size of field
 function fieldSize(index) {
+    sizeOfField = index;
+    doubleSizeOfField = index * index;
+    gameLive = true;
     if (index === 3) {
         load_zone.classList.remove('zone1');
         load_zone.classList.add('zone');
@@ -32,37 +58,93 @@ function fieldSize(index) {
     }
 }
 
-//функция нажатия и вызова "Х"
+//function of pressing and calling "Х"
 function click(event) {
     var target_element = document.getElementById(event.target.id);
     if (!target_element.value.length) {
-        target_element.value = 'x';
-        checkVictory();
+        target_element.value = 'X';
+        checkEndGame();
         if (gameLive) {
             AI();
+            // debugger;
         }
     }
+    bku();
+    checkForVictory();
 }
 
 function randNum(min, max) {
     return Math.round(Math.random() * (max - min) + min);
 }
 
-// бот
+// bot
 function AI() {
-    var rand = randNum(0, 8);
+    var rand = randNum(1, doubleSizeOfField - 1);
     var elem = document.getElementById(id + rand);
-    if (elem.value === 'x' || elem.value === 'O') {
-        AI()
+    if (elem.value === 'X' || elem.value === 'O') {
+        AI();// debugger;
     } else {
         elem.value = 'O';
     }
 }
 
-function checkVictory() {
+// function entryMassive() {
+//     localDocument = document;
+//     checkingMassive = [];
+//     counter = 1;
+//     for (var i = 0; i < checkingMassive; i++) {
+//         localDocument.getElementById(id + counter).value = checkingMassive;
+//
+//     }
+//     counter++;
+// }
+function bku() {
+    localDocument = document;
+    checkingMassive = [];
+    for (var i = 1; i <= doubleSizeOfField; i++) {
+        checkingMassive[i]  = localDocument.getElementById(id + i).value;
+
+    }
+    console.log(checkingMassive);
+}
+
+
+//function that checking for victory through the "if" statements
+function checkForVictory() {
+    localDocument = document;
+    if (localDocument.getElementById(id + 1).value === "X" && localDocument.getElementById(id + 2).value === "X" && localDocument.getElementById(id + 3).value === "X") {
+        alert("X win");
+        initField();
+        createField(sizeOfField);
+    }
+    else if (localDocument.getElementById(id + 4).value === "X" && localDocument.getElementById(id + 5).value === "X" && localDocument.getElementById(id + 6).value === "X") {
+        alert("X win");
+    }
+    else if (localDocument.getElementById(id + 7).value === "X" && localDocument.getElementById(id + 8).value === "X" && localDocument.getElementById(id + 9).value === "X") {
+        alert("X win");
+    }
+    else if (localDocument.getElementById(id + 1).value === "X" && localDocument.getElementById(id + 5).value === "X" && localDocument.getElementById(id + 9).value === "X") {
+        alert("X win");
+    }
+    else if (localDocument.getElementById(id + 3).value === "X" && localDocument.getElementById(id + 5).value === "X" && localDocument.getElementById(id + 7).value === "X") {
+        alert("X win");
+    }
+    else if (localDocument.getElementById(id + 1).value === "X" && localDocument.getElementById(id + 4).value === "X" && localDocument.getElementById(id + 7).value === "X") {
+        alert("X win");
+    }
+    else if (localDocument.getElementById(id + 2).value === "X" && localDocument.getElementById(id + 5).value === "X" && localDocument.getElementById(id + 8).value === "X") {
+        alert("X win");
+    }
+    else if (localDocument.getElementById(id + 3).value === "X" && localDocument.getElementById(id + 6).value === "X" && localDocument.getElementById(id + 9).value === "X") {
+        alert("X win");
+    }
+}
+
+//function check for End Game
+function checkEndGame() {
     var count = 0;
 
-    for (var i = 0; i < 9; i++) {
+    for (var i = 1; i < doubleSizeOfField; i++) {
         if (!document.getElementById(id + i).value) {
             ++count;
         }
@@ -75,6 +157,26 @@ function checkVictory() {
 }
 
 
+// function checkForVictoryAnother() {
+//     var checkingMassive = [];
+//     for (var i = 0;  i < arguments.length; i++) {
+//         for (var j = 0; j < arguments[i].length; j++) {
+//             checkingMassive[checkingMassive.length] = arguments[i][j];
+//         }
+//     }
+//     return checkingMassive;
+// }
+//
+// checkForVictoryAnother();
+//
+// var emptyMassive = [];
+// var counter = 1;
+// for (var i = 0; i < emptyMassive; i++) {
+//     if (document.getElementById(id + counter).value === "X") {
+//         return alert("X win");
+//     }
+//     counter++;
+// }
 
 // var zone = document.getElementById("zone");
 //

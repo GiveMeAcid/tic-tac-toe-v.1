@@ -1,13 +1,13 @@
 body {
     background-image: url("http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/seigaiha.png");
-    font-family: century gothic, footlight mt light;
+    font-family: CURSIVE, century gothic, footlight mt light;
     color: #7b3487;
     text-shadow: 0 0px 5px rgba(119, 7, 84, 0.5);
 }
 
 #header {
     margin: 0 38%;
-    font-size: 60px;
+    font-size: 50px;
     position: absolute;
     /*text-shadow: #770754;*/
 }
@@ -26,15 +26,16 @@ body {
 #zoneSize > div > input {
     margin: 5px 15px;
     width: 60px;
-    height: 25px;
+    height: 40px;
     border-radius: 5px;
     outline: none;
-    font-size: 20px;
+    font-size: 23px;
     color: #7b3487;
     box-shadow: 0 0px 5px rgba(119, 7, 84, 0.9);
     text-shadow: 0 0px 5px rgba(119, 7, 84, 0.3);
     background: url('http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/cork-wallet.png');
     cursor: pointer;
+    font-family: CURSIVE;
 }
 
 #zoneSize > div > input:hover {
@@ -72,6 +73,9 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     text-shadow: 0 0px 5px rgba(119, 7, 84, 0.3);
     background: url('http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/cork-wallet.png');
+    font-family: CURSIVE;
+    /*font-family: CENTURY GOTHIC;*/
+    /*filter: blur(.8px);*/
 }
 
 /*.zone2 {*/
